@@ -101,27 +101,3 @@ const changedSnakeKey Recase.snakify(keyToChange);
 console.log(changedCamelKey);
 // date_of_birth
 ```
-
-### Exceptions
-
-If you need to ignore certain keys from being transformed while using the `snakeCopy` or `camelCopy` methods, pass a second parameter of a list of ignored keys.
-
-```javascript
-const IGNORED_KEYS = ['my_favorite_npm_package'];
-const objectToChange = {
-    date_of_birth: new Date(),
-    first_name: 'Devin',
-    my_favorite_npm_package: 'better-recase',
-};
-
-const result = Recase.camelCopy(objectToChange, IGNORED_KEYS);
-
-console.log(result);
-/*
-{
-    dateOfBirth: new Date(),
-    firstName: 'Devin',
-    my_favorite_npm_package: 'better-recase',
-}
-*/
-```

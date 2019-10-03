@@ -1,7 +1,7 @@
 {
   "name": "better-recase",
-  "version": "0.1.0",
-  "description": "",
+  "version": "0.2.1",
+  "description": "Easy-to-use Recursive object recasing library",
   "keywords": [],
   "main": "dist/recase.umd.js",
   "module": "dist/recase.es5.js",

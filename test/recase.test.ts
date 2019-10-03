@@ -2,30 +2,6 @@ import Recase from "../src/recase";
 
 describe("Recase", () => {
   describe('snakeCopy', () => {
-    describe('when given exceptions', () => {
-      it('ignores the exceptions', () => {
-        const object = {
-          randomIgnoredKey: true,
-          notIgnoredKey: false,
-          otherNotIgnoredKey: {
-            randomIgnoredKey: true,
-          }
-        };
-
-        const result = Recase.snakeCopy(object, [
-          'randomIgnoredKey',
-        ]);
-
-        expect(result).toStrictEqual({
-          randomIgnoredKey: true,
-          not_ignored_key: false,
-          other_not_ignored_key: {
-            randomIgnoredKey: true,
-          }
-        });
-      });
-    });
-
     describe('when given a date', () => {
       it('returns the date', () => {
         const date = new Date();
@@ -61,30 +37,6 @@ describe("Recase", () => {
   });
 
   describe('camelCopy', () => {
-    describe('when given exceptions', () => {
-      it('ignores the exceptions', () => {
-        const object = {
-          random_ignored_key: true,
-          not_ignored_key: false,
-          other_not_ignored_key: {
-            random_ignored_key: true,
-          }
-        };
-
-        const result = Recase.camelCopy(object, [
-          'random_ignored_key'
-        ]);
-
-        expect(result).toStrictEqual({
-          random_ignored_key: true,
-          notIgnoredKey: false,
-          otherNotIgnoredKey: {
-            random_ignored_key: true,
-          }
-        });
-      });
-    });
-
     describe('when given a date', () => {
       it('works', () => {
 

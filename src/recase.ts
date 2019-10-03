@@ -1,16 +1,10 @@
-type Exceptions = Array<string>; 
-
 export default class Recase {
-  public static snakeCopy(obj: any, exceptions: Exceptions = []): any {
-    const recaseFunction = (key: any) => exceptions.includes(key) ? key : this.snakify(key);
-
-    return Recase.deepCopy(obj, recaseFunction);
+  public static snakeCopy(obj: any): any {
+    return Recase.deepCopy(obj, this.snakify);
   }
 
-  public static camelCopy(obj: any, exceptions: Exceptions = []): any {
-    const recaseFunction = (key: any) => exceptions.includes(key) ? key : this.camelize(key);
-
-    return Recase.deepCopy(obj, recaseFunction);
+  public static camelCopy(obj: any): any {
+    return Recase.deepCopy(obj, this.camelize);
   }
 
   public static camelize(key: any): any {
