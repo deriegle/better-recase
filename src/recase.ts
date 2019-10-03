@@ -1,36 +1,37 @@
 export default class Recase {
-  public static snakeCopy(obj: any): any {
+  public static snakeCopy<T>(obj: T): T {
     return Recase.deepCopy(obj, this.snakify);
   }
 
-  public static camelCopy(obj: any): any {
+  public static camelCopy<T>(obj: T): T {
     return Recase.deepCopy(obj, this.camelize);
   }
 
-  public static camelize(key: any): any {
+  public static camelize(key: string): string {
     return key
     .replace(/^(_+)/, '*$1*')
     .replace(/_([a-z])/g, (_: any, c: any) => c.toUpperCase())
     .replace(/^\*(_+)\*/, '$1');
   }
 
-  public static snakify(key: any): any {
+  public static snakify(key: string): string {
     return (key.replace(/([A-Z])/g, '_$1').toLowerCase());
   }
 
-  private static deepCopy(orig: any, recaseFunc: Function) {
-    switch (true) {
-      case Array.isArray(orig):
-        return Recase.recaseArray(orig, recaseFunc);
-      case Recase.isPresentObject(orig) && !Recase.isDate(orig):
-        return Recase.recaseObject(orig, recaseFunc);
-      default:
-        return orig;
+  private static deepCopy<T>(orig: Array<T> | T, recaseFunc: Function): any {
+    if (Array.isArray(orig)) {
+      return Recase.recaseArray(orig, recaseFunc);
     }
+
+    if (Recase.isPresentObject(orig) && !Recase.isDate(orig)) {
+      return Recase.recaseObject(orig, recaseFunc);
+    }
+
+    return orig;
   }
 
-  private static recaseObject(orig: any, recaseFunc: Function) {
-    return Object.entries(orig).reduce((result: any, [key, value]) => {
+  private static recaseObject(orig: { [k: string]: any }, recaseFunc: Function) {
+    return Object.entries(orig).reduce((result: { [k: string]: any }, [key, value]) => {
       const recasedKey = recaseFunc(key);
       result[recasedKey] = Recase.deepCopy(value, recaseFunc);
 
@@ -38,8 +39,8 @@ export default class Recase {
     }, {});
   }
 
-  private static recaseArray(orig: any, recaseFunc: Function) {
-    return orig.map((val: any) => {
+  private static recaseArray<T>(orig: Array<T>, recaseFunc: Function) {
+    return orig.map((val: T) => {
       return Recase.deepCopy(val, recaseFunc);
     });
   }
