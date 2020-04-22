@@ -116,4 +116,24 @@ describe('Recase', () => {
       })
     })
   })
+
+  describe('snakify', () => {
+    it('converts a camel cased string correctly', () => {
+      expect(Recase.snakify('helloWorld')).toBe('hello_world')
+    })
+
+    it('returns the same string when already snake case', () => {
+      expect(Recase.snakify('hello_world')).toBe('hello_world')
+    })
+  })
+
+  describe('camelize', () => {
+    it('converts a snake cased string correctly', () => {
+      expect(Recase.camelize('hello_world')).toBe('helloWorld')
+    })
+
+    it('returns the same string when already camel case', () => {
+      expect(Recase.camelize('helloWorld')).toBe('helloWorld')
+    })
+  })
 })
