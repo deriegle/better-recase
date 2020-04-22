@@ -20,6 +20,30 @@ describe('Recase', () => {
           camel_cased_variable_name: true
         })
       })
+
+      it('does not modify the existing object', () => {
+        const objectToConvert = {
+          camelCasedVariableName: true,
+          deeplyNestedObject: {
+            doesThisWork: true
+          }
+        }
+
+        const result = Recase.snakeCopy(objectToConvert)
+
+        expect(result).toStrictEqual({
+          camel_cased_variable_name: true,
+          deeply_nested_object: {
+            does_this_work: true
+          }
+        })
+        expect(objectToConvert).toStrictEqual({
+          camelCasedVariableName: true,
+          deeplyNestedObject: {
+            doesThisWork: true
+          }
+        })
+      })
     })
 
     describe('when given an array', () => {
@@ -52,6 +76,30 @@ describe('Recase', () => {
 
         expect(result).toStrictEqual({
           snakeCasedVariableName: true
+        })
+      })
+
+      it('does not modify the existing object', () => {
+        const objectToConvert = {
+          camel_cased_variable_name: true,
+          deeply_nested_object: {
+            does_this_work: true
+          }
+        }
+
+        const result = Recase.camelCopy(objectToConvert)
+
+        expect(result).toStrictEqual({
+          camelCasedVariableName: true,
+          deeplyNestedObject: {
+            doesThisWork: true
+          }
+        })
+        expect(objectToConvert).toStrictEqual({
+          camel_cased_variable_name: true,
+          deeply_nested_object: {
+            does_this_work: true
+          }
         })
       })
     })
