@@ -44,6 +44,14 @@ describe('Recase', () => {
           }
         })
       })
+
+      it('works with camel caps keys', () => {
+        const result = Recase.snakeCopy({ CamelCasedVariableName: true })
+
+        expect(result).toStrictEqual({
+          camel_cased_variable_name: true
+        })
+      })
     })
 
     describe('when given an array', () => {
@@ -102,6 +110,14 @@ describe('Recase', () => {
           }
         })
       })
+
+      it('works with camel caps keys', () => {
+        const result = Recase.camelCopy({ CamelCapsVariableName: true })
+
+        expect(result).toStrictEqual({
+          camelCapsVariableName: true
+        })
+      })
     })
 
     describe('when given an array', () => {
@@ -125,6 +141,10 @@ describe('Recase', () => {
     it('returns the same string when already snake case', () => {
       expect(Recase.snakify('hello_world')).toBe('hello_world')
     })
+
+    it('converts camel caps to snake case', () => {
+      expect(Recase.snakify('HelloWorld')).toBe('hello_world')
+    })
   })
 
   describe('camelize', () => {
@@ -134,6 +154,10 @@ describe('Recase', () => {
 
     it('returns the same string when already camel case', () => {
       expect(Recase.camelize('helloWorld')).toBe('helloWorld')
+    })
+
+    it('converts camel caps to camel case', () => {
+      expect(Recase.camelize('HelloWorld')).toBe('helloWorld')
     })
   })
 })

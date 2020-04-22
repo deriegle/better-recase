@@ -19,6 +19,11 @@ export default class Recase {
    * @params obj
    */
   public static camelize(key: string): string {
+    // Check for CamelCaps string
+    if (key[0].match(/[A-Z]/)) {
+      key = `${key[0].toLowerCase()}${key.slice(1)}`
+    }
+
     return key
       .replace(/^(_+)/, '*$1*')
       .replace(/_([a-z])/g, (_: any, c: any) => c.toUpperCase())
@@ -30,6 +35,11 @@ export default class Recase {
    * @params obj
    */
   public static snakify(key: string): string {
+    // Check for CamelCaps string
+    if (key[0].match(/[A-Z]/)) {
+      key = `${key[0].toLowerCase()}${key.slice(1)}`
+    }
+
     return key.replace(/([A-Z])/g, '_$1').toLowerCase()
   }
 
