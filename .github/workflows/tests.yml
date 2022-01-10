@@ -19,4 +19,4 @@ jobs:
 
     # Runs a single command using the runners shell
     - name: Run Jest tests
-      uses: stefanoeb/jest-action@1.0.3
+      uses: stefanoeb/jest-action@1.0.4
